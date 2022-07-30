@@ -9,6 +9,6 @@ const Search = () => {
                 className="form-control search-input"
                 placeholder="Einen Mitarbeiter suchen" />
     );
-}
+};
 
 export default Search;

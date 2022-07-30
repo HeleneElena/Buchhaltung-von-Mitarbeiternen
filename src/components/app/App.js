@@ -7,6 +7,13 @@ import PersonalAdd from '../personalAdd/PersonalAdd';
 import './App.css';
 
 function App() {
+
+    const data = [
+        {id: 1, name: "Monika Bauer", salary: 5500, increase: false},
+        {id: 2, name: "Tanja Borrmann", salary: 2700, increase: false},
+        {id: 3, name: "Alex Merz", salary: 3200, increase: false},
+    ];
+
     return (
         <div className="app">
             <Info />
@@ -14,7 +21,7 @@ function App() {
                 <Search />
                 <Filter />
             </div>
-            <PersonalList />
+            <PersonalList data={data} />
             <PersonalAdd />
         </div>
     )

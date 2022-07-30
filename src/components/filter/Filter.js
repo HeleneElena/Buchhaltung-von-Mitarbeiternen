@@ -12,7 +12,7 @@ const Filter = () => {
             <button 
                 className="btn btn-outline-light"
                 type='button'>
-                    Gehalt mehr als 1000$
+                    Gehalt mehr als 3000€
             </button>
             <button 
                 className="btn btn-outline-light"
