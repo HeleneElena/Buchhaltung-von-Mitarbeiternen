@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Filter from '../filter/Filter';
 import Info from '../info/Info';
 import PersonalList from './../personalList/PersonalList';
@@ -6,24 +8,57 @@ import PersonalAdd from '../personalAdd/PersonalAdd';
 
 import './App.css';
 
-function App() {
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [
+                {id: 1, name: "Monika Bauer", salary: 5500, increase: false},
+                {id: 2, name: "Tanja Borrmann", salary: 2700, increase: false},
+                {id: 3, name: "Alex Merz", salary: 3200, increase: false},
+            ]
+        };
+        this.maxId = 4;
+    }
 
-    const data = [
-        {id: 1, name: "Monika Bauer", salary: 5500, increase: false},
-        {id: 2, name: "Tanja Borrmann", salary: 2700, increase: false},
-        {id: 3, name: "Alex Merz", salary: 3200, increase: false},
-    ];
+    deleteItem = (id) => {
+        this.setState(({data}) => {
+            return {
+                data: data.filter(item => item.id !== id)
+            }
+        })
+    }
 
-    return (
-        <div className="app">
-            <Info />
-            <div className="search">
-                <Search />
-                <Filter />
+    addItem = (name, salary) => {
+        const newItem = {
+            name, 
+            salary,
+            increase: false,
+            id: this.maxId++
+        }
+        this.setState(({data}) => {
+            const newArr = [...data, newItem];
+            return {
+                data: newArr
+            }
+        });
+    }
+    
+    render() {
+        return (
+            <div className="app">
+                <Info />
+                <div className="search">
+                    <Search />
+                    <Filter />
+                </div>
+                <PersonalList 
+                    data={this.state.data}
+                    onDelete={this.deleteItem} />
+                <PersonalAdd onAdd={this.addItem} />
             </div>
-            <PersonalList data={data} />
-            <PersonalAdd />
-        </div>
-    )
+        )
+    }
 }
+
 export default App;
