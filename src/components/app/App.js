@@ -13,9 +13,9 @@ class App extends React.Component {
         super(props);
         this.state = {
             data: [
-                {id: 1, name: "Monika Bauer", salary: 5500, increase: false},
-                {id: 2, name: "Tanja Borrmann", salary: 2700, increase: false},
-                {id: 3, name: "Alex Merz", salary: 3200, increase: false},
+                {id: 1, name: "Monika Bauer", salary: 5500, rise: true, increase: false},
+                {id: 2, name: "Tanja Borrmann", salary: 2700, rise: false, increase: false},
+                {id: 3, name: "Alex Merz", salary: 3200, rise: false, increase: false},
             ]
         };
         this.maxId = 4;
@@ -34,6 +34,7 @@ class App extends React.Component {
             name, 
             salary,
             increase: false,
+            rise: false,
             id: this.maxId++
         }
         this.setState(({data}) => {
@@ -42,6 +43,14 @@ class App extends React.Component {
                 data: newArr
             }
         });
+    }
+
+    onToggleIncrease = (id) => {    {/* метод изменяет состояние increase на противоположное*/}
+
+    }
+
+    onToggleRise = (id) => {             {/* переключаю состояние сотрудника */}
+        
     }
     
     render() {
@@ -54,7 +63,9 @@ class App extends React.Component {
                 </div>
                 <PersonalList 
                     data={this.state.data}
-                    onDelete={this.deleteItem} />
+                    onDelete={this.deleteItem}
+                    onToggleIncrease={this.onToggleIncrease}
+                    onToggleRise={this.onToggleRise} />
                 <PersonalAdd onAdd={this.addItem} />
             </div>
         )
