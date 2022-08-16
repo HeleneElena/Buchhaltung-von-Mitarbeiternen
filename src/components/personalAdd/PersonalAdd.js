@@ -1,7 +1,7 @@
 import React from 'react';
 import './PersonalAdd.css';
 
-class PersonalAdd extends React.Component {
+class PersonalAdd extends React.Component { 
     constructor(props) {
         super(props);
         this.state = {
@@ -12,47 +12,39 @@ class PersonalAdd extends React.Component {
 
     onValueChange = (e) => {
         this.setState({
-            [e.target.name]: e.target.value        
-        });
-    };
-
-    onSubmit = (e) => {
-        e.preventDefault();
-        this.props.onAdd(this.state.name, this.state.salary);
-        this.setState({
-            name: '',
-            salary: ''
+            [e.target.name]: e.target.value
         })
     }
-    
-    render() {
+    render () {
         const {name, salary} = this.state;
         
         return (
         <div className="app-add-form">
             <h3>Hinzufügen eines neuen Mitarbeiters</h3>
             <form
-                className="add-form d-flex"
-                onSubmit = {this.onSubmit}>
+                className="add-form d-flex">
                 <input type="text"
                     className="form-control new-post-label"
                     placeholder="Wie ist sein Name?" 
-                    name="name" 
-                    value={name}                    
-                    onChange={this.onValueChange} />
+                    name="name"
+                    value={name}
+                    onChange={this.onValueChange}
+                />
                 <input type="number"
                     className="form-control new-post-label"
                     placeholder="Gehalt in €?" 
-                    name="salary" 
-                        value={salary}
-                    onChange={this.onValueChange} />
+                    name="salary"
+                    value={salary}
+                    onChange={this.onValueChange}
+                />
 
                 <button type="submit"
                         className="btn btn-outline-light">Hinzufügen</button>
             </form>
         </div>
-    );
+    )
     }
+    
 }
 
 export default PersonalAdd;

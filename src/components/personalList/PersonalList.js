@@ -1,28 +1,20 @@
-import React from 'react';
-import PersonalListItem from '../personalListItem/PersonalListItem';
 
 import './PersonalList.css';
+import PersonalListItem from './../personalListItem/PersonalListItem';
 
-const PersonalList = ({data, onDelete, onToggleIncrease, onToggleRise}) => {
+const PersonalList = ({data}) => {
     
-    const person = data.map(el => {
-        const {id, ...elProps} = el;
-            return (
-                <PersonalListItem 
-                    key={id} 
-                    {...elProps} 
-                    onDelete={() => onDelete(id)} 
-                    onToggleIncrease={() => onToggleIncrease(id)}
-                    onToggleRise={() => onToggleRise(id)}
-                /> 
-            );    
-        });
-
+    const elements = data.map((item, id) => {
+        return (
+            <PersonalListItem key={id} {...item}  />
+        )
+    })
+    
     return (
-            <ul className="app-list list-group">
-                {person}   
-            </ul>
-    );
+        <ul className='app-list list-group'>
+            {elements}
+        </ul>  
+    )
 };
 
 export default PersonalList;
