@@ -2,12 +2,12 @@ import React from 'react';
 
 import './Info.css';
 
-const Info = () => {
+const Info = ({persona, increased}) => {
     return (
         <div className='app-info'>
             <h1>Buchhaltung von Mitarbeitern im Unternehmen</h1>
-            <h2>Gesamtanzahl der Mitarbeiter: </h2>
-            <h2>Die Prämie wird erhalten: </h2>
+            <h2>Gesamtanzahl der Mitarbeiter: {persona} </h2>
+            <h2>Die Prämie wird erhalten: {increased} </h2>
         </div>
     );
 }

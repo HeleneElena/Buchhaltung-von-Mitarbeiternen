@@ -9,13 +9,13 @@ import PersonalAdd from '../personalAdd/PersonalAdd';
 import './App.css';
 
 class App extends React.Component {
-    constructor(props) {
+     constructor(props) {
         super(props);
         this.state = {
             data: [
-                {id: 1, name: 'John N.', salary: 1290, increase: false},
-                {id: 2, name: 'Monika G.', salary: 5500, increase: false},
-                {id: 3, name: 'Tanja S.', salary: 7500, increase: false}
+                {name: 'Artur C.', salary: 5800, increase: false, rise: true, id: 1},
+                {name: 'Michael M.', salary: 7000, increase: false, rise: false, id: 2},
+                {name: 'Miroslav W.', salary: 9200, increase: false, rise: false, id: 3}
             ]
         }
         this.maxId = 4;
@@ -26,7 +26,7 @@ class App extends React.Component {
             return {
                 data: data.filter(item => item.id !== id)
             }
-        })
+        });
     }
 
     addItem = (name, salary) => {
@@ -34,6 +34,7 @@ class App extends React.Component {
             name, 
             salary,
             increase: false,
+            rise: false,
             id: this.maxId++
         }
         this.setState(({data}) => {
@@ -44,40 +45,36 @@ class App extends React.Component {
         });
     }
 
-    onToggleIncrease = (id) => {
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-
-            const old = data[index];
-            const newItem = {...old, increase: !old.increase};
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-
-            return {
-                data: newArr
-            }
-        })
+    onToggleProp = (id, prop) => {
+        this.setState(({data}) => ({
+            data: data.map(item => {
+                if (item.id === id) {
+                    return {...item, [prop]: !item[prop]}
+                }
+                return item;
+            })
+        }))
     }
 
-    onToggleRise = (id) => {
-        console.log(`Rise this ${id}`);
-    }
+    render() {
+        const increased = this.state.data.filter(item => item.increase).length;
 
-    render () {
         return (
             <div className="app">
-                <Info />
-
-                <div className="search">
-                    <Search />
-                    <Filter />
+                <Info persona={this.state.data.length} increased={increased}/>
+    
+                <div className="search-panel">
+                    <Search/>
+                    <Filter/>
                 </div>
-
+                
                 <PersonalList 
                     data={this.state.data}
-                    onDelete={this.deleteItem} />
-                <PersonalAdd onAdd={this.addItem} />
+                    onDelete={this.deleteItem}
+                    onToggleProp={this.onToggleProp}/>
+                <PersonalAdd onAdd={this.addItem}/>
             </div>
-        )
+        );
     }
 
 }
