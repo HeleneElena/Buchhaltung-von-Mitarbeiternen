@@ -16,8 +16,10 @@ class App extends React.Component {
                 {name: 'Artur C.', salary: 5800, increase: false, rise: true, id: 1},
                 {name: 'Michael M.', salary: 7000, increase: false, rise: false, id: 2},
                 {name: 'Miroslav W.', salary: 9200, increase: false, rise: false, id: 3}
-            ]
-        }
+            ],
+            term: '',
+            filter: 'all'
+        };
         this.maxId = 4;
     }
 
@@ -56,20 +58,51 @@ class App extends React.Component {
         }))
     }
 
+    searchPerson = (items, term) => {
+        if (term.length === 0) {
+            return items;
+        }
+
+        return items.filter(item => {
+            return item.name.indexOf(term) > -1;
+        })
+    }
+
+    updateSearch = (term) => {
+        this.setState({term});
+    }
+
+    filterFunction = (arr, filter) => {
+        switch (filter) {
+            case 'rise' :
+                return arr.filter(el => el.rise);
+            case 'salaryMore' :
+                return arr.filter(el => el.salary > 3000);
+            default:
+                return arr
+        }
+    }
+
+    onFilterSelect = (filter) => {
+        this.setState({filter})
+    }
+
     render() {
         const increased = this.state.data.filter(item => item.increase).length;
+        const {data, term, filter} = this.state;
+        const visibleData = this.filterFunction(this.searchPerson(data, term), filter)
 
         return (
             <div className="app">
-                <Info persona={this.state.data.length} increased={increased}/>
+                <Info persona={data.length} increased={increased}/>
     
                 <div className="search-panel">
-                    <Search/>
-                    <Filter/>
+                    <Search updateSearch={this.updateSearch} />
+                    <Filter filter={filter} />
                 </div>
                 
                 <PersonalList 
-                    data={this.state.data}
+                    data={visibleData}
                     onDelete={this.deleteItem}
                     onToggleProp={this.onToggleProp}/>
                 <PersonalAdd onAdd={this.addItem}/>

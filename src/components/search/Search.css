@@ -9,3 +9,8 @@
 .search-input {
     margin-top: 5px;
 }
+.search-panel {
+    background-color: #16B097;
+    padding: 1%;
+    margin-top: 10px;
+}

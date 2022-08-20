@@ -1,26 +1,33 @@
 import React from 'react';
 import './Filter.css';
 
-const Filter = () => {
-    return (
-        <div className='btn-group'>
+const Filter = ({filter}) => {
+    const buttonsData = [
+        {name: 'all', label: 'Alle Mitarbeiter'},
+        {name: 'salaryMore', label: 'Gehalt mehr als 3000€'},
+        {name: 'rise', label: 'Auf Gehaltserhöhung'},
+    ];
+
+    const btns = buttonsData.map(({name, label}) => {
+        const active = filter === name;
+        const clazz = active ? 'btn-light' : 'btn-outline-light';
+
+        return (
             <button 
-                className="btn btn-light"
-                type='button'>
-                    Alle Mitarbeiter
+                className={`btn ${clazz}`}
+                type='button'
+                key={name}>
+                    {label}
             </button>
-            <button 
-                className="btn btn-outline-light"
-                type='button'>
-                    Gehalt mehr als 3000€
-            </button>
-            <button 
-                className="btn btn-outline-light"
-                type='button'>
-                    Auf Gahaltserhöhung
-            </button>
-        </div>
-    );
+        );
+    });
+
+        return (
+            <div className='btn-group'>
+                {btns}
+            </div>
+        );
+    
 }
 
 export default Filter;
