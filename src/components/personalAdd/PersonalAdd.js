@@ -2,13 +2,10 @@ import React from 'react';
 import './PersonalAdd.css';
 
 class PersonalAdd extends React.Component { 
-    constructor(props) {
-        super(props);
-        this.state = {
+    state = {
             name: '',
             salary: ''
         };
-    }
 
     onValueChange = (e) => {
         this.setState({

@@ -10,7 +10,7 @@ class Search extends React.Component {
         };
     }
 
-    updateSearch = (e) => { 
+    updateSearch = (e) => { // поиск по буквам маленьким и большим отдельно
         const term = e.target.value;
         this.setState({term});
         this.props.updateSearch(term);

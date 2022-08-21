@@ -1,7 +1,7 @@
 import React from 'react';
 import './Filter.css';
 
-const Filter = ({filter}) => {
+const Filter = ({filter, onFilterSelect}) => {
     const buttonsData = [
         {name: 'all', label: 'Alle Mitarbeiter'},
         {name: 'salaryMore', label: 'Gehalt mehr als 3000€'},
@@ -16,7 +16,8 @@ const Filter = ({filter}) => {
             <button 
                 className={`btn ${clazz}`}
                 type='button'
-                key={name}>
+                key={name}
+                onClick={() => onFilterSelect(name)} >
                     {label}
             </button>
         );

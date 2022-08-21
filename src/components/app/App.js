@@ -98,7 +98,7 @@ class App extends React.Component {
     
                 <div className="search-panel">
                     <Search updateSearch={this.updateSearch} />
-                    <Filter filter={filter} />
+                    <Filter filter={filter} onFilterSelect={this.onFilterSelect} />
                 </div>
                 
                 <PersonalList 
